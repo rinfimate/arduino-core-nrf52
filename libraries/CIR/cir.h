@@ -31,6 +31,10 @@
 #error "CIR library is not compatible with Arduino Primo Core"
 #endif //ARDUINO_NRF52_PRIMO_CORE
 
+#ifdef ARDUINO_SPARKFUN_NRF52
+#error "CIR library is not compatible with Sparkfun 52832"
+#endif //ARDUINO_SPARKFUN_NRF52
+
 #include <Wire.h>
 #include <stdint.h>
 #include "Arduino.h"

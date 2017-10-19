@@ -77,6 +77,18 @@ class SPISettings {
 		}
 		#endif //ARDUINO_NRF52_PRIMO_CORE
 
+		#ifdef ARDUINO_SPARKFUN_NRF52
+		SPISettings(uint32_t clock, uint8_t bitOrder, uint8_t dataMode, int uc_pinMISO, int uc_pinMOSI, int uc_pinSCK)
+		{
+			interface_clock = clock;
+			bit_order = bitOrder;
+			data_mode = dataMode;
+			_uc_pinMiso = uc_pinMISO;
+			_uc_pinSCK = uc_pinSCK;
+			_uc_pinMosi = uc_pinMOSI;
+		}
+		#endif //ARDUINO_SPARKFUN_NRF52
+
 		SPISettings(void)
 		{
 			interface_clock = 4000000;
@@ -92,6 +104,11 @@ class SPISettings {
 			uint8_t _uc_pinMosi = 0;
 			uint8_t _uc_pinSCK = 0;
 		#endif //ARDUINO_NRF52_PRIMO_CORE
+		#ifdef ARDUINO_SPARKFUN_NRF52
+		uint8_t _uc_pinMiso = 0;
+		uint8_t _uc_pinMosi = 0;
+		uint8_t _uc_pinSCK = 0;
+		#endif //ARDUINO_SPARKFUN_NRF52
 	
 	friend class SPIClass;	
 };
@@ -122,6 +139,11 @@ class SPIClass {
 	void begin(int uc_pinMISO, int uc_pinMOSI, int uc_pinSCK);
 	void beginSlave(int uc_pinMISO, int uc_pinMOSI, int uc_pinSCK);
 #endif	
+#ifdef ARDUINO_SPARKFUN_NRF52
+	void begin(int uc_pinMISO, int uc_pinMOSI, int uc_pinSCK);
+	void beginSlave(int uc_pinMISO, int uc_pinMOSI, int uc_pinSCK);
+#endif	
+
 	
 	void setBitOrder(BitOrder order);
 	void setDataMode(uint8_t uc_mode);

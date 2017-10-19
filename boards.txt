@@ -67,3 +67,33 @@ primo_core.build.components=components
 
 primo_core.bootloader.file=primo_core/bootloader_primo_core_v1.0.0.hex
 primo_core.firmware.softdevice.file=primo/softdevice/s132_nrf52_2.0.0_softdevice.hex
+
+#####################################
+######## SPARKFUN nRF52832 ##########
+
+SparkFunNRF52.name=SparkFun nRF52832
+
+#SparkFunNRF52.menu.upload.serial=via Serial
+#SparkFunNRF52.menu.upload.bluetooth=via Bluetooth
+#SparkFunNRF52.menu.upload.bluetooth.upload.tool=otable
+
+SparkFunNRF52.upload.tool=openocd
+SparkFunNRF52.upload.protocol=sam-ba
+SparkFunNRF52.upload.maximum_size=385024
+SparkFunNRF52.upload.use_1200bps_touch=false
+SparkFunNRF52.upload.speed=115200
+SparkFunNRF52.upload.wait_for_upload_port=false
+
+SparkFunNRF52.build.mcu=cortex-m4
+SparkFunNRF52.build.f_cpu=64000000L
+SparkFunNRF52.build.usb_product="Sparkfun nRF52832"
+SparkFunNRF52.build.board=SPARKFUN_NRF52
+SparkFunNRF52.build.core=arduino
+SparkFunNRF52.build.extra_flags=-mthumb
+SparkFunNRF52.build.ldscript=linker_scripts/gcc/flash.ld
+SparkFunNRF52.build.openocdscript=openocd_scripts/sparkfun_nrf52832.cfg
+SparkFunNRF52.build.variant=SparkFun_nRF52832
+SparkFunNRF52.build.components=components
+
+SparkFunNRF52.bootloader.file=primo_core/bootloader_primo_core_v1.0.0.hex
+SparkFunNRF52.firmware.softdevice.file=primo/softdevice/s132_nrf52_2.0.0_softdevice.hex

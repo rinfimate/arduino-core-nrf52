@@ -123,6 +123,56 @@ void SPIClass::beginSlave(int uc_pinMISO, int uc_pinMOSI, int uc_pinSCK)
 }
 #endif //ARDUINO_NRF52_PRIMO_CORE
 
+#ifdef ARDUINO_SPARKFUN_NRF52
+
+void SPIClass::begin(int uc_pinMISO, int uc_pinMOSI, int uc_pinSCK)
+{
+    _uc_pinMiso = uc_pinMISO;
+    _uc_pinSCK = uc_pinSCK;
+    _uc_pinMosi = uc_pinMOSI;
+
+    pinMode(_uc_pinSCK, OUTPUT);
+    pinMode(_uc_pinMosi, OUTPUT);
+    pinMode(_uc_pinMiso, INPUT);
+
+	_SPIInstance->PSELSCK = g_APinDescription[_uc_pinSCK].ulPin;
+    _SPIInstance->PSELMOSI = g_APinDescription[_uc_pinMosi].ulPin;
+    _SPIInstance->PSELMISO = g_APinDescription[_uc_pinMiso].ulPin;
+
+	// Default speed set to 4Mhz, SPI mode set to MODE 0 and Bit order set to MSB first.
+	_SPIInstance->FREQUENCY = (SPI_FREQUENCY_FREQUENCY_M4 << SPI_FREQUENCY_FREQUENCY_Pos);
+	setDataMode(SPI_MODE0);
+	setBitOrder(MSBFIRST);
+	_order=MSBFIRST;
+
+	_SPIInstance->ENABLE = (SPI_ENABLE_ENABLE_Enabled << SPI_ENABLE_ENABLE_Pos);
+}
+
+
+void SPIClass::beginSlave(int uc_pinMISO, int uc_pinMOSI, int uc_pinSCK)
+{
+    _uc_pinMiso = uc_pinMISO;
+    _uc_pinSCK = uc_pinSCK;
+    _uc_pinMosi = uc_pinMOSI;
+
+	pinMode(_uc_pinSCK, INPUT);
+    pinMode(_uc_pinMosi, OUTPUT);
+    pinMode(_uc_pinMiso, INPUT);
+
+
+    _SPIInstance->PSELSCK = g_APinDescription[_uc_pinSCK].ulPin;
+    _SPIInstance->PSELMOSI = g_APinDescription[_uc_pinMosi].ulPin;
+    _SPIInstance->PSELMISO = g_APinDescription[_uc_pinMiso].ulPin;
+
+	
+	setDataMode(SPI_MODE0);
+	setBitOrder(MSBFIRST);
+	_order=MSBFIRST;
+
+	_SPIInstance->ENABLE = (SPI_ENABLE_ENABLE_Enabled << SPI_ENABLE_ENABLE_Pos);
+}
+#endif //ARDUINO_SPARKFUN_NRF52
+
 void SPIClass::beginTransaction(SPISettings settings)
 {
 	uint8_t bitOrder;
@@ -153,6 +203,19 @@ void SPIClass::beginTransaction(SPISettings settings)
 		_SPIInstance->PSELMISO = g_APinDescription[settings._uc_pinMiso].ulPin;
 	}
 #endif //ARDUINO_NRF52_PRIMO_CORE
+
+#ifdef ARDUINO_SPARKFUN_NRF52
+if(settings._uc_pinMiso != 0 && settings._uc_pinMosi != 0 && settings._uc_pinSCK != 0){
+	// override configuration with pins selected by user
+	pinMode(settings._uc_pinSCK, OUTPUT);
+	pinMode(settings._uc_pinMosi, OUTPUT);
+	pinMode(settings._uc_pinMiso, INPUT);
+
+	_SPIInstance->PSELSCK = g_APinDescription[settings._uc_pinSCK].ulPin;
+	_SPIInstance->PSELMOSI = g_APinDescription[settings._uc_pinMosi].ulPin;
+	_SPIInstance->PSELMISO = g_APinDescription[settings._uc_pinMiso].ulPin;
+}
+#endif //ARDUINO_SPARKFUN_NRF52
 	
 	if(settings.interface_clock < 182000)
 		setClockDivider(SPI_CLOCK_DIV128);
