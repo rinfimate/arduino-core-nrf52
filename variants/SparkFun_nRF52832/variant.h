@@ -69,10 +69,8 @@ extern "C"{
 #define digitalPinHasPWM(P)        ( g_APinDescription[P].ulPWMChannel != NOT_ON_PWM )
 #define digitalPinToInterrupt(P)   ( P )
 
-#define USER_LED           	 (7u)
-#define RED_LED              (11u)
-#define GREEN_LED         	 (12u)
-#define BLUE_LED			 (7u)
+#define USER_LED           	 (8u)
+#define BLUE_LED			       (7u)
 
 #define LED_BUILTIN          USER_LED
 #define BLE_LED              BLUE_LED
