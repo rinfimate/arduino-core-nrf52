@@ -1,7 +1,26 @@
 # Arduino core for nRF52 CPU
 
 This repository contains the source code and the configuration files of the Arduino Core for Nordic's nRF52 processor (used on
-the Arduino Primo and Arduino Primo Core boards).
+the Arduino Primo and Arduino Primo Core boards). 
+Added support for Sparkfun nRF52832 Breakout.
+
+## Supports the Following MCUs
+* Arduino Primo
+* Arduino Primo Core
+* Sparkfun nRF52832 Breakout (https://www.sparkfun.com/products/13990) - This is a raw breakout board for nRF52832 maintaining the same pin mapping as the SOC. 
+
+## Limitations for Sparkfun nRF52832 Breakout
+* Uses Primo Core Bootloader so will not support USB to FTDI DFU using the Reset and DFU button
+* Will need Segger Programmer, nRF52 HDK or any programmer supporting SWD Protocol (Using the C and D Pins located at the center of the Board)
+
+## How to Upload Firmware to Sparkfun nRF52832 Breakout
+
+* Connect your SWD Programmer to the Breakout. (VCC, GND, SWDIO, SWCLK)
+* Download nRFX Command Line Tools (nRF5x-Command-Line-Tools-<Platform>) for your platform  from (https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF51822). This contains the "nrfjprog" command you will use to burn the firmware.
+* Compile any of the Sketches.
+* Locate the <sketch-name>.ino-merged.hex. You can turn on Verbose mode in Arduino IDE Compilation preferences.
+* Run the command "nrfjprog --program <sketch-name>.ino-merged.hex --verify --chiperase -f NRF52"
+* Unplug and Plug the Programmer to Restart. Requires Restart for the new sketch to take effect.
 
 ## Support
 
