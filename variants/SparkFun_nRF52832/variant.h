@@ -98,9 +98,6 @@ static const uint8_t SCK  = PIN_SPI_SCK;
 #define PIN_WIRE_SDA         (20u)
 #define PIN_WIRE_SCL         (21u)
 
-// #define PIN_WIRE_SDA1        (18u)
-// #define PIN_WIRE_SCL1        (19u)
-
 /*
  * Analog pins
  */
