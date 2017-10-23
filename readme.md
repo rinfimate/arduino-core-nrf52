@@ -16,10 +16,10 @@ Added support for Sparkfun nRF52832 Breakout.
 ## How to Upload Firmware to Sparkfun nRF52832 Breakout
 
 * Connect your SWD Programmer to the Breakout. (VCC, GND, SWDIO, SWCLK)
-* Download nRFX Command Line Tools (nRF5x-Command-Line-Tools-<Platform>) for your platform  from (https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF51822). This contains the "nrfjprog" command you will use to burn the firmware.
+* Download nRFX Command Line Tools (nRF5x-Command-Line-Tools-&lt;Platform Name&gt;) for your platform  from (https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF51822). This contains the "nrfjprog" command you will use to burn the firmware.
 * Compile any of the Sketches.
-* Locate the <sketch-name>.ino-merged.hex. You can turn on Verbose mode in Arduino IDE Compilation preferences.
-* Run the command "nrfjprog --program <sketch-name>.ino-merged.hex --verify --chiperase -f NRF52"
+* Locate the &lt;sketch-name&gt;.ino-merged.hex. You can turn on Verbose mode in Arduino IDE Compilation preferences.
+* Run the command "nrfjprog --program &lt;sketch-name&gt;.ino-merged.hex --verify --chiperase -f NRF52"
 * Unplug and Plug the Programmer to Restart. Requires Restart for the new sketch to take effect.
 
 ## Support
