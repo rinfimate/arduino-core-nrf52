@@ -46,6 +46,7 @@ void BLESerial::end() {
   this->_rxHead = this->_rxTail = 0;
   flush();
   BLEPeripheral::disconnect();
+  BLEPeripheral::end();
 }
 
 int BLESerial::available(void) {
